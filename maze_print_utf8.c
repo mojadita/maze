@@ -188,7 +188,7 @@ static size_t add_inter_row_line(MAZE mz, FILE *out, int row)
 			res += add_inter_row_inter_cell_char(mz, out, row, col);
 		int n;
 		for (n = 0; n < mz->cols_cell; n++)
-			res += add_cell_body_top_char(mz, out, 0, col);
+			res += add_cell_body_top_char(mz, out, row, col);
 	} /* for (col ...) */
 	res += add_inter_row_last_cell_char(mz, out, row);
 	fputc('\n', out);

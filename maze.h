@@ -16,7 +16,7 @@
 #define SOUTH_WALL		(1 << 2)
 #define WEST_WALL		(1 << 3)
 
-#define VISITED_WALL	(1 << 4)
+#define VISITED_MARK	(1 << 4)
 
 #define ALL_WALLS	(NORTH_WALL | EAST_WALL | SOUTH_WALL |\
 						WEST_WALL)

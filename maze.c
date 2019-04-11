@@ -176,24 +176,24 @@ maze_verifyWalls(MAZE maze)
 	for (r = 0; r < maze->rows; r++) {
 		int c;
 		for (c = 0; c < maze->cols; c++) {
-			if (maze->cells[r][c] & VISITED_WALL) {
+			if (maze->cells[r][c] & VISITED_MARK) {
 				if (r > 0 &&
-						maze->cells[r-1][c] & VISITED_WALL) {
+						maze->cells[r-1][c] & VISITED_MARK) {
 					maze->cells[r][c]   &= ~NORTH_WALL;
 					maze->cells[r-1][c] &= ~SOUTH_WALL;
 				}
 				if (c < maze->cols-1 &&
-						maze->cells[r][c+1] & VISITED_WALL) {
+						maze->cells[r][c+1] & VISITED_MARK) {
 					maze->cells[r][c]   &= ~EAST_WALL;
 					maze->cells[r][c+1] &= ~WEST_WALL;
 				}
 				if (r < maze->rows-1 &&
-						maze->cells[r+1][c] & VISITED_WALL) {
+						maze->cells[r+1][c] & VISITED_MARK) {
 					maze->cells[r][c]   &= ~SOUTH_WALL;
 					maze->cells[r+1][c] &= ~NORTH_WALL;
 				}
 				if (c > 0 &&
-						maze->cells[r][c-1] & VISITED_WALL) {
+						maze->cells[r][c-1] & VISITED_MARK) {
 					maze->cells[r][c]	&= ~WEST_WALL;
 					maze->cells[r][c-1] &= ~EAST_WALL;
 				}

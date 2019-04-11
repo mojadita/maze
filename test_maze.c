@@ -13,7 +13,9 @@ int main(int argc, char **argv)
 	maze_init(m, 20, 20);
 #if 1
 	maze_setCellCols(m, 3);
-	maze_setCellRows(m, 1);
+	maze_setCellRows(m, 2);
 #endif
+	maze_setWalls(m, 5, 5, 15, 15, VISITED_MARK);
+	maze_verifyWalls(m);
 	maze_print(m, stdout);
 }
