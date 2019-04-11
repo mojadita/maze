@@ -12,7 +12,7 @@
 #include "mazeP.h"
 
 MAZE
-new_maze()
+maze_new()
 {
 	MAZE maze = malloc( sizeof (MAZE) );
 	assert( maze != NULL );
@@ -28,14 +28,14 @@ new_maze()
 } /* new_maze */
 
 void
-free_maze(MAZE maze)
+maze_free(MAZE maze)
 {
-	clear_maze(maze);
+	maze_clear(maze);
 	free(maze);
 } /* free_maze */
 
 void
-init_maze(MAZE maze, int rows, int cols)
+maze_init(MAZE maze, int rows, int cols)
 {
 	maze->rows = rows;
 	maze->cols = cols;
@@ -56,7 +56,7 @@ init_maze(MAZE maze, int rows, int cols)
 } /* init_maze */
 
 void
-clear_maze(MAZE maze)
+maze_clear(MAZE maze)
 {
 	if (!maze->cells) return; // nothing to do.
 	int r;
