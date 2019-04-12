@@ -1,5 +1,5 @@
 .depend
-maze_2chars
-maze_simple
-maze_utf8
+maze
 *.o
+*.core
+core
