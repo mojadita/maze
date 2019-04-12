@@ -4,7 +4,8 @@
 # Copyright: (C) 2019 LUIS COLORADO.  All rights reserved.
 # License: BSD.
 
-targets = maze_utf8 maze_simple maze_2chars
+targets = maze
+toclean = $(targets)
 RM ?= rm -f
 
 
@@ -18,13 +19,10 @@ distclean: clean
 
 .PHONY: all clean
 
-common_objs = maze.o test_maze.o maze_rdf.o
-maze_utf8_objs = $(common_objs) maze_print_utf8.o
-maze_simple_objs = $(common_objs) maze_print_simple.o
-maze_2chars_objs = $(common_objs) maze_print_2chars.o
+maze_objs = test_maze.o maze.o maze_print_utf8.o \
+	maze_print_2chars.o maze_print_simple.o \
+	maze_print_data.o maze_rdf.o
+toclean += $(maze_objs)
 
-.for t in $(targets)
-toclean += $t $($t_objs)
-$t: $($t_objs) $($t_deps)
-	$(CC) $(LDFLAGS) $($t_ldflags) $($t_objs) $($t_libs) -o $@
-.endfor
+maze: $(maze_objs) $(maze_deps)
+	$(CC) $(LDFLAGS) $(maze_ldflags) $(maze_objs) $(maze_libs) -o $@

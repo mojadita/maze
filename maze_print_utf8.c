@@ -1,4 +1,4 @@
-/* maze_print.c -- Maze module printing routine.
+/* maze_print_utf8.c -- Maze module printing routine.
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: Thu Apr 11 08:09:27 EEST 2019
  * Copyright: (C) 2019 Luis Colorado <luiscoloradourcola@gmail.com>
@@ -228,7 +228,7 @@ static size_t add_last_line(MAZE mz, FILE *out)
 	return ++res;
 } /* add_last_line */
 
-size_t maze_print(MAZE mz, FILE *out)
+size_t maze_print_utf8(MAZE mz, FILE *out)
 {
 	int row;
 	size_t res = 0;

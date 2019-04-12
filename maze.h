@@ -58,7 +58,12 @@ void	maze_resetWalls(MAZE maze, int row0, int col0,
 
 void	maze_verifyWalls(MAZE maze);
 
-size_t	maze_print(MAZE maze, FILE *out);
+size_t	(*maze_print)(MAZE maze, FILE *out);
+
+size_t maze_print_simple(MAZE maze, FILE *out);
+size_t maze_print_utf8(MAZE maze, FILE *out);
+size_t maze_print_data(MAZE maze, FILE *out);
+size_t maze_print_2chars(MAZE maze, FILE *out);
 
 void maze_rdf(MAZE mz, int row, int col);
 
