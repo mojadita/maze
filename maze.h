@@ -1,5 +1,4 @@
-/* maze.h -- definiciones de constantes y tipos para el objeto
- * Maze.
+/* maze.h -- constant ant type definitions for MAZE object.
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: Wed Apr 10 16:14:22 EEST 2019
  * Copyright: (C) 2019 Luis Colorado <luiscoloradourcola@gmail.com>

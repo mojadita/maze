@@ -1,4 +1,4 @@
-/* Name: test_maze.c --test program for the maze.
+/* Name: test_maze.c -- simple test program for the MAZE.
  * Author: Luis Colorado <luiscoloradourcola@gmail.coms>
  * Date: Thu Apr 11 07:50:13 EEST 2019
  * Copyright: (C) 2019 Luis Colorado.  All rights reserved.

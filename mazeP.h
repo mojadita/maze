@@ -1,5 +1,4 @@
-/* mazeP.h -- definiciones de constantes y tipos para el objeto
- * Maze.
+/* mazeP.h -- private type and constant definitions for MAZE.
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: Wed Apr 10 15:46:54 EEST 2019
  * Copyright: (C) 2019 Luis Colorado <luiscoloradourcola@gmail.com>

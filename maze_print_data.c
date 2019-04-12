@@ -12,11 +12,11 @@
 
 static char *print_cell(int cell, char *buf, size_t buf_sz)
 {
-	snprintf(buf, buf_sz, "\"%s%s%s%s%s\"",
-		cell & NORTH_WALL ? "N" : "",
-		cell & EAST_WALL ? "E" : "",
-		cell & SOUTH_WALL ? "S" : "",
-		cell & WEST_WALL ? "W" : "",
+	snprintf(buf, buf_sz,	"\"%s%s%s%s%s\"",
+		cell & NORTH_WALL   ? "N" : "",
+		cell & EAST_WALL    ? "E" : "",
+		cell & SOUTH_WALL   ? "S" : "",
+		cell & WEST_WALL    ? "W" : "",
 		cell & VISITED_MARK ? "*" : "");
 	return buf;
 } /* print_cell */
