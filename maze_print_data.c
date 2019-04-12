@@ -10,37 +10,79 @@
 
 #include "mazeP.h"
 
-static char *print_cell(int cell, char *buf, size_t buf_sz)
+#define COLS_PER_LINE_MASK 0x03
+#define ROWS_PER_LINE_MASK 0x07
+
+static struct bit_desc {
+	char *name;
+	int	  mask;
+} bit_descs[] = {
+#define MASK(_arg) { .name = #_arg, .mask = _arg }
+	MASK(NORTH_WALL),
+	MASK(EAST_WALL),
+	MASK(SOUTH_WALL),
+	MASK(WEST_WALL),
+	MASK(VISITED_MARK),
+#undef MASK
+	{ .name = NULL, .mask = 0 }
+};
+
+static char *cell2string(int cell, char *buf, size_t buf_sz)
 {
-	snprintf(buf, buf_sz,	"\"%s%s%s%s%s\"",
-		cell & NORTH_WALL   ? "N" : "",
-		cell & EAST_WALL    ? "E" : "",
-		cell & SOUTH_WALL   ? "S" : "",
-		cell & WEST_WALL    ? "W" : "",
-		cell & VISITED_MARK ? "*" : "");
-	return buf;
+	size_t n;
+	struct bit_desc *bit;
+	char *output = buf;
+	for (bit = bit_descs; bit->name; bit++) {
+		if (cell & bit->mask) {
+			if (buf > output) {
+				n = snprintf( buf, buf_sz, "|");
+				buf += n; buf_sz -= n;
+			}
+			n = snprintf( buf, buf_sz,
+				"%s", bit->name);
+			buf += n; buf_sz -= n;
+		}
+	}
+	return output;
 } /* print_cell */
+
+#define CELL_FMT "%s_row%d"
 
 size_t maze_print_data(MAZE mz, FILE *out)
 {
 	int row, col;
 	size_t res = 0;
 
-	res += fprintf(out, "{");
 	for(row = 0; row < mz->rows; row++) {
-		if (row) {
-			res += fprintf(out, ",\n ");
-		}
-		fprintf(out, "{");
+		res += fprintf(out,
+			"char *" CELL_FMT "[%d] = {",
+			mz->name, row, mz->cols);
 		for(col = 0; col < mz->cols; col++) {
-			char buffer[20];
-			res += fprintf(out, "%s%7s",
-				col ? ", " : "",
-				print_cell(mz->cells[row][col],
+			char buffer[128];
+			res += fprintf(out, "%s%s",
+				col
+					?  col & COLS_PER_LINE_MASK
+						? ", "
+						: ",\n\t\t"
+					: "",
+				cell2string(mz->cells[row][col],
 					buffer, sizeof buffer));
 		}
-		fprintf(out, "}");
+		fprintf(out, "};\n\n");
 	} /* for (r ...) */
+	res += fprintf(out,
+		"char *%s_cells[%d] = {",
+		mz->name, mz->rows);
+	for (row = 0; row < mz->rows; row++) {
+		res += fprintf(out,
+			"%s" CELL_FMT,
+			row
+				? row & ROWS_PER_LINE_MASK
+					? ", "
+					: ",\n\t\t"
+				:"",
+			mz->name, row);
+	}
 	res += fprintf(out, "};\n");
 	return res;
 } /* maze_print */

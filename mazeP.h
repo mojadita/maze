@@ -11,6 +11,7 @@
 #include "maze.h"
 
 struct maze {
+	char *name;
 	int rows, cols;
 	int rows_cell, cols_cell;
 	int to_visit;

@@ -19,6 +19,7 @@ maze_new()
 	MAZE maze = malloc( sizeof (MAZE) );
 	assert( maze != NULL );
 
+	maze->name = "maze";
 	maze->rows = 0;
 	maze->cols = 0;
 	maze->rows_cell = 0;
@@ -72,6 +73,12 @@ maze_clear(MAZE maze)
 	maze->to_visit = 0;
 } /* clear_maze */
 
+char *
+maze_getName(MAZE maze)
+{
+	return maze->name;
+}
+
 int
 maze_getCols(MAZE maze)
 {
@@ -83,6 +90,12 @@ maze_getRows(MAZE maze)
 {
 	return maze->rows;
 } /* maze_getRows */
+
+void
+maze_setName(MAZE maze, char *name)
+{
+	maze->name = name;
+}
 
 void
 maze_setCellCols(MAZE maze, int cols)
@@ -141,10 +154,10 @@ void
 maze_setWalls(MAZE maze, int row0, int col0,
 			int row1, int col1, int val)
 {
-	assert(    row0 >= 0    && row0 <  maze->rows
-		&& row1 >= row0 && row1 <= maze->rows
-		&& col0 >= 0    && col0 <  maze->cols
-		&& col1 >= col0	&& col1 <= maze->cols);
+	if (row0 < 0) row0 = 0;
+	if (row1 > maze->rows) row1 = maze->rows;
+	if (col0 < 0) col0 = 0;
+	if (col1 > maze->cols) col1 = maze->cols;
 
 	int r;
 	for (r = row0; r < row1; r++) {
@@ -158,10 +171,10 @@ void
 maze_resetWalls(MAZE maze, int row0, int col0,
 			int row1, int col1, int val)
 {
-	assert(    row0 >= 0    && row0 <  maze->rows
-		&& row1 >= row0 && row1 <= maze->rows
-		&& col0 >= 0    && col0 <  maze->cols
-		&& col1 >= col0	&& col1 <= maze->cols);
+	if (row0 < 0) row0 = 0;
+	if (row1 > maze->rows) row1 = maze->rows;
+	if (col0 < 0) col0 = 0;
+	if (col1 > maze->cols) col1 = maze->cols;
 
 	int r;
 	for (r = row0; r < row1; r++) {
@@ -170,6 +183,23 @@ maze_resetWalls(MAZE maze, int row0, int col0,
 			maze->cells[r][c] &= ~val;
 	}
 } /* maze_resetWalls */
+
+void
+maze_switchWalls(MAZE maze, int row0, int col0,
+			int row1, int col1, int val)
+{
+	if (row0 < 0) row0 = 0;
+	if (row1 > maze->rows) row1 = maze->rows;
+	if (col0 < 0) col0 = 0;
+	if (col1 > maze->cols) col1 = maze->cols;
+
+	int r;
+	for (r = row0; r < row1; r++) {
+		int c;
+		for (c = col0; c < col1; c++)
+			maze->cells[r][c] ^= val;
+	}
+} /* maze_switchWalls */
 
 void
 maze_verifyWalls(MAZE maze)

@@ -5,18 +5,63 @@
  * License: BSD.
  */
 #include <stdio.h>
+#include <getopt.h>
+#include <time.h>
+#include <stdlib.h>
+
 #include "maze.h"
+
+#define F(_fmt) __FILE__":%d:%s: " _fmt, __LINE__, __func__
 
 int main(int argc, char **argv)
 {
+	int opt;
+	int cols = 20, rows = 20, cell_rows = -1, cell_cols = -1;
+
+	while ((opt = getopt(argc, argv, "s:Sp:r:c:R:C:")) >= 0) {
+		switch(opt) {
+		case 's': {
+				int seed = atoi(optarg);
+				srandom(seed);
+				fprintf(stderr,
+					F("seed set to %d\n"),
+					seed);
+			} /* block */
+			break;
+		case 'S': {
+				struct timespec now;
+				clock_gettime(CLOCK_REALTIME_PRECISE, &now);
+				int seed = now.tv_sec ^ now.tv_nsec;
+				srandom(seed);
+				fprintf(stderr,
+					F("seed set to %d\n"),
+					seed);
+			} /* block */
+			break;
+		case 'p':
+			switch(optarg[0]) {
+			default:
+			case 'u': maze_print = maze_print_utf8; break;
+			case '#': maze_print = maze_print_2chars; break;
+			case 'a': maze_print = maze_print_simple; break;
+			case 'c': maze_print = maze_print_data; break;
+			} /* switch */
+			break;
+		case 'r': rows = atoi(optarg); break;
+		case 'c': cols = atoi(optarg); break;
+		case 'R': cell_rows = atoi(optarg); break;
+		case 'C': cell_cols = atoi(optarg); break;
+		} /* switch */
+	} /* while */
+
 	MAZE m = maze_new();
-	maze_init(m, 20, 20);
-#if 0
-	maze_setCellCols(m, 3);
-	maze_setCellRows(m, 2);
-#endif
-	maze_setWalls(m, 5, 5, 15, 15, VISITED_MARK);
-	maze_verifyWalls(m);
+	maze_init(m, rows, cols);
+	if (cell_rows >= 0) maze_setCellRows(m, cell_rows);
+	if (cell_cols >= 0) maze_setCellCols(m, cell_cols);
+	/* set inner part as nonvisited */
+	maze_setWalls(m, rows/4, cols/4, 3*rows/4, 3*rows/4, VISITED_MARK);
 	maze_rdf(m, 0, 0);
+	maze_switchWalls(m, rows/4, cols/4, 3*rows/4, 3*rows/4, VISITED_MARK);
+	maze_rdf(m, rows/4, cols/4);
 	maze_print(m, stdout);
 }

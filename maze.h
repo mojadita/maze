@@ -20,7 +20,7 @@
 #define ALL_WALLS	(NORTH_WALL | EAST_WALL | SOUTH_WALL |\
 						WEST_WALL)
 
-typedef struct maze *MAZE;
+typedef struct maze *MAZE; /* opaque */
 
 MAZE	maze_new();
 
@@ -30,9 +30,13 @@ void	maze_init(MAZE maze, int rows, int cols);
 
 void	maze_clear(MAZE maze);
 
+char *maze_getName(MAZE maze);
+
 int	maze_getCols(MAZE maze);
 
 int	maze_getRows(MAZE maze);
+
+void maze_setName(MAZE maze, char *name);
 
 void	maze_setCellCols(MAZE maze, int cols);
 
@@ -53,6 +57,9 @@ void	maze_setWalls(MAZE maze, int row0, int col0,
 			int row1, int col1, int val);
 
 void	maze_resetWalls(MAZE maze, int row0, int col0,
+			int row1, int col1, int val);
+
+void	maze_switchWalls(MAZE maze, int row0, int col0,
 			int row1, int col1, int val);
 
 void	maze_verifyWalls(MAZE maze);
