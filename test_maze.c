@@ -17,5 +17,6 @@ int main(int argc, char **argv)
 #endif
 	maze_setWalls(m, 5, 5, 15, 15, VISITED_MARK);
 	maze_verifyWalls(m);
+	maze_rdf(m, 0, 0);
 	maze_print(m, stdout);
 }

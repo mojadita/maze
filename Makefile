@@ -18,9 +18,10 @@ distclean: clean
 
 .PHONY: all clean
 
-maze_utf8_objs = maze.o test_maze.o maze_print_utf8.o
-maze_simple_objs = maze.o test_maze.o maze_print_simple.o
-maze_2chars_objs = maze.o test_maze.o maze_print_2chars.o
+common_objs = maze.o test_maze.o maze_rdf.o
+maze_utf8_objs = $(common_objs) maze_print_utf8.o
+maze_simple_objs = $(common_objs) maze_print_simple.o
+maze_2chars_objs = $(common_objs) maze_print_2chars.o
 
 .for t in $(targets)
 toclean += $t $($t_objs)

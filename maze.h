@@ -60,4 +60,6 @@ void	maze_verifyWalls(MAZE maze);
 
 size_t	maze_print(MAZE maze, FILE *out);
 
+void maze_rdf(MAZE mz, int row, int col);
+
 #endif /* _MAZE_H */
