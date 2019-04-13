@@ -58,36 +58,8 @@ int main(int argc, char **argv)
 	maze_init(m, rows, cols);
 	if (cell_rows >= 0) maze_setCellRows(m, cell_rows);
 	if (cell_cols >= 0) maze_setCellCols(m, cell_cols);
-#if 0
-	/* set inner part as nonvisited */
-	maze_setWalls(m, rows/4, cols/4, 3*rows/4, 3*cols/4, VISITED_MARK);
-	/* make a rectangle in the middle */
 	maze_rdf(m, 0, 0);
-	maze_switchWalls(m, rows/4, cols/4, 3*rows/4, 3*cols/4, VISITED_MARK);
-	maze_setWalls(m, rows/2 - 2, cols/2 - 2, rows/2 + 2, cols/2 + 2,
-		VISITED_MARK);
-#endif
-	maze_rdf(m, rows/4, cols/4);
-#if 0
-	maze_resetWalls(m, 0, 0, rows, cols, VISITED_MARK);
-	maze_setWalls(m,
-		rows/2 - 2, cols/2 - 2,
-		rows/2 + 2, cols/2 + 2,
-		VISITED_MARK);
-	maze_setWalls(m,
-		rows/2 - 2, cols/2 - 3,
-		rows/2 - 1, cols/2 - 1,
-		VISITED_MARK);
-	maze_setWalls(m,
-		3*rows/4 - 1, 3*cols/4 - 1,
-		3*rows/4, 3*cols/4 + 1,
-		VISITED_MARK);
-	maze_verifyWalls(m);
-	maze_resetWalls(m,
-		0, 0, 1, 1,
-		WEST_WALL);
-#endif
-	maze_resetWalls(m, 0, 0, 1, 1, NORTH_WALL | WEST_WALL);
-	maze_resetWalls(m, rows-1, cols-1, rows, cols, EAST_WALL | SOUTH_WALL);
+	maze_resetWalls(m, 0, 0, 1, 1, WEST_WALL);
+	maze_resetWalls(m, rows-1, cols-1, rows, cols, EAST_WALL);
 	maze_print(m, stdout);
 }

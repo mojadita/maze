@@ -73,8 +73,8 @@ static char n13[] = { 15 };
 static char n14[] = { 15 };
 
 static struct state_desc {
-	int sz;
-	char *nxt;
+	int		sz;
+	char   *nxt;
 } tab_states[] = {
 
 #define entry(_arg) { .sz = sizeof n##_arg, .nxt = n##_arg, }
@@ -83,6 +83,7 @@ static struct state_desc {
 	entry(4), entry(5), entry(6), entry(7),
 	entry(8), entry(9), entry(10), entry(11),
 	entry(12), entry(13), entry(14), 
+
 }; /* tab_states */
 
 static int n_tab_states = sizeof tab_states / sizeof tab_states[0];
