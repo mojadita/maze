@@ -56,10 +56,12 @@ int main(int argc, char **argv)
 
 	MAZE m = maze_new();
 	maze_init(m, rows, cols);
-	if (cell_rows >= 0) maze_setCellRows(m, cell_rows);
-	if (cell_cols >= 0) maze_setCellCols(m, cell_cols);
-	maze_rdf(m, 0, 0);
+	if (cell_rows > 0) maze_setCellRows(m, cell_rows);
+	if (cell_cols > 0) maze_setCellCols(m, cell_cols);
+	maze_rdf(m, 0, 0); /* build maze, Recursive Depth First */
+	/* open doors at the corners. */
 	maze_resetWalls(m, 0, 0, 1, 1, WEST_WALL);
 	maze_resetWalls(m, rows-1, cols-1, rows, cols, EAST_WALL);
+	/* and print */
 	maze_print(m, stdout);
 }
