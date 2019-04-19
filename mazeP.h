@@ -10,6 +10,10 @@
 
 #include "maze.h"
 
+#ifndef F
+#define F(_fmt) __FILE__":%d: " _fmt, __LINE__
+#endif
+
 struct maze {
 	char *name;
 	int rows, cols;

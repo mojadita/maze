@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 			break;
 		case 'S': {
 				struct timespec now;
-				clock_gettime(CLOCK_REALTIME_PRECISE, &now);
+				clock_gettime(CLOCK_REALTIME, &now);
 				int seed = now.tv_sec ^ now.tv_nsec;
 				srandom(seed);
 				fprintf(stderr,

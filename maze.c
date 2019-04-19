@@ -16,7 +16,7 @@ size_t (*maze_print)(MAZE mz, FILE *out) = maze_print_utf8;
 MAZE
 maze_new()
 {
-	MAZE maze = malloc( sizeof (MAZE) );
+	MAZE maze = malloc( sizeof *maze );
 	assert( maze != NULL );
 
 	maze->name = "maze";
