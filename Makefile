@@ -7,7 +7,10 @@
 targets = maze
 toclean = $(targets)
 RM ?= rm -f
-
+INSTALL ?= install
+prefix ?= $(HOME)
+bindir ?= $(prefix)/bin
+mandir ?= $(prefix)/man/man6
 
 all: $(targets)
 clean:
@@ -16,6 +19,9 @@ distclean: clean
 	$(RM) .depend
 .depend: Makefile *.c
 	mkdep *.c
+install:
+	$(INSTALL) maze $(bindir)
+	$(INSTALL) maze.6 $(mandir)
 
 .PHONY: all clean
 
