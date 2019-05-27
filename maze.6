@@ -7,7 +7,12 @@
 .Sh SYNOPSIS
 .Nm maze
 .Op Fl S
-.Ar
+.Op Fl s Ar seed
+.Op Fl p Ar printmode
+.Op Fl r Ar rows
+.Op Fl c Ar columns
+.Op Fl R Ar cellrows
+.Op Fl C Ar cellcolumns
 .Sh DESCRIPTION
 The
 .Nm
@@ -28,8 +33,60 @@ giving the result of walls dropped in the way.
 .Pp
 By modifying the program source, you can dispose different ways
 to build the maze.
+.Pp
+The
+.Op Fl S
+flag makes
+.Nm
+to generate a random seed based on the clock time in order to
+initialize the random number generator.  When this option is
+used, the seed selected is output through
+.Li stderr .
+The
+.Op Fl s Ar seed
+allows you to use an already generated seed, so you should be
+able to generate the same, already generated maze, with only
+reusing the same seed used in the first place.
+.Pp
+The
+.Op Fl p Ar printmode
+allows you to select one of several printing algorithms. The
+.Ar printmode
+value represents a letter, meaning:
+.Ar u
+prints the maze using utf-8 line drawing characters.
+.Ar #
+prints the maze using only
+.Li '#'
+characters.
+.Ar a
+uses
+.Li '_' ,
+.Li '.'
+and
+.Li '|'
+characters.
+The
+.Ar c
+prints a C syntax version of the internal format maze, for
+embedding in a C program.
+.Pp
+The
+.Op Fl r Ar rows
+allows to specify the number of horizontal rows in the maze.
+The
+.Op Fl c Ar cols
+allows to specify the number of vertical columns in the maze.
+The
+.Op Fl R Ar rows_per_cell
+allows to specify how many lines of text are used to print a
+single maze row.
+The
+.Op Fl C Ar cols_per_cell
+allows to specify how many columns of text are used to print a
+single maze cell.
 .\" .Sh EXAMPLES
 .Sh AUTHORS
-Luis Colorado
+.An Luis Colorado Aq Mt luiscoloradourcola@gmail.com
 .Sh BUGS
 All mine. :)

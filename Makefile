@@ -19,7 +19,7 @@ distclean: clean
 	$(RM) .depend
 .depend: Makefile *.c
 	mkdep *.c
-install:
+install: $(targets) maze.6
 	$(INSTALL) maze $(bindir)
 	$(INSTALL) maze.6 $(mandir)
 
