@@ -1,0 +1,35 @@
+.Dd $Mdocdate$
+.Dt MAZE 6
+.Os
+.Sh NAME
+.Nm maze
+.Nd Small program to write mazes
+.Sh SYNOPSIS
+.Nm maze
+.Op Fl S
+.Ar
+.Sh DESCRIPTION
+The
+.Nm
+utility writes on stdout a maze of deepth first recursive
+search path.
+.Pp
+The algorithm starts at a given cell and tries to visit every
+cell in the maze in sequence in a one shot.
+As it proceeds, it drops walls needed to visit the unvisited
+cells, making the final maze a set of existent/nonexistent walls
+in the maze.
+As long as the algorithm gets locked, it backtracks searching
+for a group of nonvisited alternative cells in order to open
+new tracks on that point on.
+.Pp
+The algorithm ends as soon as all possible paths are exhausted,
+giving the result of walls dropped in the way.
+.Pp
+By modifying the program source, you can dispose different ways
+to build the maze.
+.\" .Sh EXAMPLES
+.Sh AUTHORS
+Luis Colorado
+.Sh BUGS
+All mine. :)
