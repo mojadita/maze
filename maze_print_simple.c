@@ -89,4 +89,4 @@ size_t maze_print_simple(MAZE mz, FILE *out)
 		res += add_inter_row_line(mz, out, row);
 	} /* for (r ...) */
 	return res;
-} /* maze_print */
+} /* maze_print_simple */

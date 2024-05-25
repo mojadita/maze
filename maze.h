@@ -64,7 +64,7 @@ void	maze_switchWalls(MAZE maze, int row0, int col0,
 
 void	maze_verifyWalls(MAZE maze);
 
-size_t	(*maze_print)(MAZE maze, FILE *out);
+extern size_t	(*maze_print)(MAZE maze, FILE *out);
 
 size_t maze_print_simple(MAZE maze, FILE *out);
 size_t maze_print_utf8(MAZE maze, FILE *out);

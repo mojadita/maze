@@ -80,4 +80,4 @@ size_t maze_print_2chars(MAZE mz, FILE *out)
 		add_inter_row_line(mz, out, row);
 	} /* for (r ...) */
 	return (mz->rows+2)*(mz->cols+3);
-} /* maze_print */
+} /* maze_print_2chars */

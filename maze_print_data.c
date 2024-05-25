@@ -85,4 +85,4 @@ size_t maze_print_data(MAZE mz, FILE *out)
 	}
 	res += fprintf(out, "};\n");
 	return res;
-} /* maze_print */
+} /* maze_print_data */

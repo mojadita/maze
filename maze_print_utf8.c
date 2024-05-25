@@ -243,4 +243,4 @@ size_t maze_print_utf8(MAZE mz, FILE *out)
 			res += add_body_row_line(mz, out, row);
 	} /* for (r ...) */
 	return res + add_last_line(mz, out);
-} /* maze_print */
+} /* maze_print_utf8 */
