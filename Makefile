@@ -4,24 +4,43 @@
 # Copyright: (C) 2019 LUIS COLORADO.  All rights reserved.
 # License: BSD.
 
-targets = maze
-toclean = $(targets)
-RM ?= rm -f
-INSTALL ?= install
-prefix ?= $(HOME)
-bindir ?= $(prefix)/bin
-mandir ?= $(prefix)/man/man6
+targets      = maze
+toclean      = $(targets)
+
+RM          ?= rm -f
+INSTALL     ?= install
+GZIP        ?= gzip -v
+prefix      ?= /usr/local
+bindir      ?= $(prefix)/bin
+datarootdir ?= $(prefix)/share
+mandir      ?= $(prefix)/share/man
+man6dir     ?= $(mandir)/man6
 
 all: $(targets)
 clean:
 	$(RM) $(toclean)
 distclean: clean
 	$(RM) .depend
+
 .depend: Makefile *.c
 	mkdep *.c
-install: $(targets) maze.6
+
+toinstall = $(bindir)/maze $(man6dir)/maze.6.gz
+install: $(toinstall)
+
+$(bindir)/maze: maze $(bindir)
 	$(INSTALL) maze $(bindir)
-	$(INSTALL) maze.6 $(mandir)
+
+$(man6dir)/maze.6.gz: maze.6.gz $(man6dir)
+	$(INSTALL) maze.6 $(man6dir)
+
+$(bindir) $(man6dir):
+	$(INSTALL) -d $@
+
+.SUFFIXES: .6.gz .6
+
+.6.6.gz:
+	$(GZIP) < $<  > $@
 
 .PHONY: all clean
 

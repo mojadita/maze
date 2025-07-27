@@ -1,5 +1,6 @@
 .depend
 maze
+maze.6.gz
 *.o
 *.core
 core
