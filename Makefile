@@ -13,7 +13,7 @@ GZIP        ?= gzip -v
 prefix      ?= /usr/local
 bindir      ?= $(prefix)/bin
 datarootdir ?= $(prefix)/share
-mandir      ?= $(prefix)/share/man
+mandir      ?= $(datarootdir)/man
 man6dir     ?= $(mandir)/man6
 
 all: $(targets)
